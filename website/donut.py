@@ -12,12 +12,12 @@ from tkinter.tix import Select
     
 
 con = sqlite3.connect("db.sqlite3")
-data = pd.read_sql_query('SELECT saleapp_fruits.Desired_Fruit, COUNT( saleapp_sales_Desired_Fruit.fruits_id ) AS quantity FROM saleapp_fruits INNER JOIN saleapp_sales_Desired_Fruit ON saleapp_sales_Desired_Fruit.fruits_id=saleapp_fruits.id GROUP BY saleapp_fruits.Desired_Fruit',con)
+data = pd.read_sql_query('SELECT saleapp_fruits.fruit_name, COUNT( saleapp_sales_Desired_Fruit.fruits_id ) AS quantity FROM saleapp_fruits INNER JOIN saleapp_sales_Desired_Fruit ON saleapp_sales_Desired_Fruit.fruits_id=saleapp_fruits.id GROUP BY saleapp_fruits.fruit_name',con)
 print(data.quantity)
 
 
 fruit_quantity=data.quantity
-label = data.Desired_Fruit
+label = data.fruit_name
 explode =  (0.02,0.02,0.02,0.02)
 
 

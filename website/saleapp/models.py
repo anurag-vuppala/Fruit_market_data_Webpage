@@ -1,4 +1,5 @@
 from curses import flash
+from tkinter.font import BOLD
 from django.db import models
 from django import forms
 import datetime
@@ -27,28 +28,19 @@ class Fruits(models.Model):
                     ('Banana','Banana')
                     
                     )
-    Desired_Fruit    =  models.CharField(max_length=12,choices=fruit, default='Select', blank=False)
+    fruit_name    =  models.CharField(max_length=12,choices=fruit, default='Select')
+    
     def __str__(self):
-        return self.Desired_Fruit
+        return self.fruit_name
 
 
 class Sales(models.Model):
-    Date             =  models.DateField(default=datetime.date.today())
-    Sale_Person      =  models.CharField(max_length=10,choices=sale_person, default='Select',blank=False)
-    Customer_Name    =  models.CharField(max_length=25,blank=False)
-    Customer_Country =  models.CharField(max_length=12,choices=customer_country, default='Select',blank=False)
+    Date             =  models.DateTimeField(auto_now_add=True, null=True)
+    Sale_Person      =  models.CharField(max_length=10,choices=sale_person, default='Select',null=True)
+    Customer_Name    =  models.CharField(max_length=25, null=True)
+    Customer_Country =  models.CharField(max_length=12,choices=customer_country, default='Select',null=True)
     Desired_Fruit    =  models.ManyToManyField(Fruits)
 
+    def __str__(self):
+        return self.Customer_Name
     
-    def clean_fruitform(self):
-        field = ""
-        for data in self.cleaned_data['flowers']:
-            field += str(data)+","
-        return field.lstrip(",")
-
-    
-
-class SalesForm(forms.ModelForm):
-      class Meta:      
-            model = Sales
-            fields = '__all__'
