@@ -18,14 +18,16 @@ print(data.quantity)
 
 fruit_quantity=data.quantity
 label = data.Desired_Fruit
+explode =  (0.02,0.02,0.02,0.02)
 
 
   
-patches, text = plt.pie(fruit_quantity, labels=fruit_quantity, labeldistance=0.8)
+  
+patches, text = plt.pie(fruit_quantity, labels=fruit_quantity, explode=explode, labeldistance=0.87)
 plt.legend(patches, label,loc="center")
 plt.axis('equal')
 
-my_circle=plt.Circle( (0,0), 0.7, color='white')
+my_circle=plt.Circle( (0,0), 0.8, color='white')
 p=plt.gcf()
 p.gca().add_artist(my_circle)
 
